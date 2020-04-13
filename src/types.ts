@@ -15,7 +15,7 @@ import Option = option.Option;
 import Either = either.Either;
 
 import { createOptionFromNullable } from './helpers/io-ts';
-import { defaultOAuthOptions, defaultStatusesHomeTimelineQuery } from './helpers';
+import { defaultOAuthOptions, defaultStatusesHomeTimelineQuery, defaultStatusesUserTimelineQuery } from './helpers';
 
 export type RequestMethod = 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'UPDATE';
 
@@ -122,12 +122,33 @@ export type OAuthOptionsInput = ObjectClean<ObjectDiff<OAuthOptions, typeof defa
 
 export const StatusesHomeTimelineQuery = t.interface({
     count: createOptionFromNullable(t.number),
+    since_id: createOptionFromNullable(t.string),
     max_id: createOptionFromNullable(t.string),
+    trim_user: createOptionFromNullable(t.boolean),
+    exclude_replies: createOptionFromNullable(t.boolean),
+    include_entities: createOptionFromNullable(t.boolean),    
+    
 });
 export type StatusesHomeTimelineQueryT = t.TypeOf<typeof StatusesHomeTimelineQuery>;
 
 export type StatusesHomeTimelineQueryInput = ObjectClean<
     ObjectDiff<StatusesHomeTimelineQueryT, typeof defaultStatusesHomeTimelineQuery>
+>;
+
+export const StatusesUserTimelineQuery = t.interface({
+    user_id: createOptionFromNullable(t.string),
+    screen_name: createOptionFromNullable(t.string),
+    since_id: createOptionFromNullable(t.string),
+    count: createOptionFromNullable(t.number),
+    max_id: createOptionFromNullable(t.string),
+    trim_user: createOptionFromNullable(t.boolean),
+    exclude_replies: createOptionFromNullable(t.boolean),
+    include_entities: createOptionFromNullable(t.boolean),    
+});
+export type StatusesUserTimelineQueryT = t.TypeOf<typeof StatusesUserTimelineQuery>;
+
+export type StatusesUserTimelineQueryInput = ObjectClean<
+    ObjectDiff<StatusesUserTimelineQueryT, typeof defaultStatusesUserTimelineQuery>
 >;
 
 export type OAuthAuthenticateEndpointQuery = { oauth_token: string };

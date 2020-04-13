@@ -5,6 +5,7 @@ export enum ENDPOINTS {
     OAuthRequestToken = '/oauth/request_token',
     OAuthAccessToken = '/oauth/access_token',
     StatusesHomeTimeline = '/1.1/statuses/home_timeline.json',
+    StatusesUserTimeline = '/1.1/statuses/user_timeline.json',
     AccountVerifyCredentials = '/1.1/account/verify_credentials.json',
     AccountSettings = '/1.1/account/settings.json',
 }
